@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* Prevent dark mode extensions from affecting the site */
+    html {
+      color-scheme: light only !important;
+    }
+    
+    body, * {
+      color-scheme: light only !important;
+    }
+
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      background-color: #fff;
+      color: #000;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+    
+    #canvas-container {
+      width: 100%;
+      max-width: 800px;
+      height: 200px;
+      margin: 20px auto;
+      background-color: #f9f9f9;
+      overflow: hidden;
+    }
+    
+    #canvas-container canvas {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .hero {
+      margin-bottom: 0px;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-top: 10px;
+      margin-bottom: 0px;
+      line-height: 0.5;
+    }
+
+    .links {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .links a:hover {
+      color: #000;
+    }
+
+    .personal-blurb {
+      margin: 20px 0 40px;
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .personal-blurb a {
+      color: #555;
+      text-decoration: none;
+      font-weight: inherit;
+      transition: color 0.2s;
+    }
+
+    .personal-blurb a:hover {
+      color: #000;
+    }
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .item {
+      margin-bottom: 40px;
+    }
+
+    .item h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .dates {
+      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .role {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .item p {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    #main-content, #resume-content {
+      transition: opacity 0.5s ease;
+    }
+    
+    #resume-content {
+      display: none;
+    }
+    
+    .back-button {
+      display: inline-block;
+      margin-bottom: 30px;
+      padding: 8px 16px;
+      background-color: #f0f0f0;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #555;
+      transition: all 0.2s;
+    }
+    
+    .back-button:hover {
+      background-color: #e0e0e0;
+      color: #000;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .links {
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero fade-up">
+      <h1>vlad zelenskiy</h1>
+    <div class="links" style="flex-wrap: nowrap; overflow-x: auto;">
+      <a id="resume-link">resume</a>
+      <a href="https://linkedin.com/in/vladzelenskiy" target="_blank">linkedin</a>
+      <a href="https://github.com/vlzelen" target="_blank">github</a>
+      <a href="https://twitter.com" target="_blank">twitter</a>
+      <a href="https://www.chess.com/member/raspbe" target="_blank">chess.com</a>
+      <a href="mailto:vlad@vladtech.me">email</a>
+    </div>
+    </section>
+    
+    <div id="canvas-container"></div>
+    
+    <p class="personal-blurb fade-up">
+      system administrator at <a href="http://knowledgetransferinc.com">ktcs</a>. interested in: tech, chess, music, health wellness, motorcycles and travel. running on caffeine and bad wifi.
+    </p>
+
+    <div id="main-content">
+       
+    </div>
+    
+    <div id="resume-content">
+      <div class="back-button" id="back-button">← Back</div>
+      
+      <section class="section fade-up">
+        <h2>experience</h2>
+    
+        <div class="item">
+          <h3>Knowledge Transfer Consulting Services inc</h3>
+          <div class="dates">2025 - present</div>
+          <div class="role">Technical Support Engineer</div>
+          <p>administered microsoft azure tenant infrastructure, maintained IAM, and implemented security protocols to strengthen the organization’s cloud posture.
+</p>
+        </div>
+    
+        <div class="item">
+          <h3>Iconic Footwear</h3>
+          <div class="dates">2022 - 2023</div>
+          <div class="role">E-commerce Manager</div>
+          <p>oversaw e-commerce operations and a team of four, automated product listings, and coordinated multi-platform content across amazon, ebay, shopify and more.
+</p>
+        </div>
+      </section>
+      
+      <section class="section fade-up">
+        <h2>education</h2>
+    
+        <div class="item">
+          <h3>Western Governor's University</h3>
+          <div class="dates">2023 - 2024</div>
+          <div class="role">Bachelor of Science in Cybersecurity and Information Assurance</div>
+          <p>completed coursework in information security, networking, cloud infrastructure, and IT compliance, earning an excellence award for digital forensics analysis and technical reporting.
+</p>    
+        </div>
+      </section>
+    </div>       
+  </div>
+
+  <script>
+  // p5.js "Matrix Globe" — textured spinning code sphere with neon grid + de-synced Matrix background
+  let globe = {
+    rotY: 0,
+    rotSpeed: 0.006,
+    radius: 90
+  };
+
+  // ===== Color themes (HSB hue values) =====
+  let colorThemes = [
+    { hue: 120, name: "green" },   // Matrix green
+    { hue: 200, name: "cyan" },    // Tron blue
+    { hue: 300, name: "magenta" }, // Neo purple
+    { hue: 40,  name: "amber" },   // Hacker gold
+  ];
+  let currentTheme = 0;
+
+  // Offscreen texture for Matrix rain (globe)
+  let texG;
+  const texSize = 768;          // bigger = crisper texture
+  const charSize = 16;          // matrix glyph size
+  let cols, rows;
+  let drops = [];               // y positions per column
+  let globeSpeeds = [];         // per-column speeds (desync vs background)
+
+  // Offscreen texture for Matrix background (2D)
+  let bgG;
+  let bgCols, bgRows;
+  const bgCharSize = 14;        // slightly smaller for dense background
+  let bgDrops = [];
+  let bgSpeeds = [];            // per-column speeds
+  // gentle drift so background never aligns with globe
+  let bgXDrift = 0;
+  let bgYDrift = 0;
+  const bgXDriftSpeed = 0.25;   // px/frame (horizontal drift)
+  const bgYDriftSpeed = 0.12;   // px/frame (vertical drift)
+
+  let glyphs = "アイウエオカキクケコサシスセソタチツテトナニヌネノﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛｱｶｻﾀﾅﾊﾏﾔﾗﾜ0123456789$#*&@";
+
+  function setup() {
+    const canvas = createCanvas(800, 200, WEBGL);
+    canvas.parent('canvas-container');
+
+    // Texture for the globe
+    texG = createGraphics(texSize, texSize);
+    texG.colorMode(HSB, 360, 100, 100);
+    texG.textFont('monospace');
+    texG.textSize(charSize);
+    texG.noStroke();
+
+    cols = Math.floor(texSize / charSize);
+    rows = Math.floor(texSize / charSize);
+    drops = new Array(cols).fill(0).map(() => Math.floor(random(rows)));
+    globeSpeeds = new Array(cols).fill(0).map(() => random(0.3, 0.7)); // vary each column
+
+    // Background graphics (match canvas size initially)
+    bgG = createGraphics(800, 200);
+    bgG.colorMode(HSB, 360, 100, 100);
+    bgG.textFont('monospace');
+    bgG.textSize(bgCharSize);
+    bgG.noStroke();
+
+    bgCols = Math.floor(bgG.width / bgCharSize);
+    bgRows = Math.floor(bgG.height / bgCharSize);
+    bgDrops = new Array(bgCols).fill(0).map(() => Math.floor(random(bgRows)));
+    bgSpeeds = new Array(bgCols).fill(0).map(() => random(0.08, 0.25)); // slower & varied
+
+    // Enable nice smoothing
+    setAttributes('antialias', true);
+  }
+
+  function draw() {
+    // --- 2D screen-space: draw the Matrix background first ---
+    updateMatrixBackgroundTexture();
+    push();
+    resetMatrix(); // switch to screen space
+    translate(-width / 2, -height / 2);
+
+    // Draw background texture
+    image(bgG, 0, 0, width, height);
+
+    // Dark overlay for depth
+    noStroke();
+    fill(0, 80); // darker background
+    rect(0, 0, width, height);
+    pop();
+
+    // --- 3D lighting ---
+    ambientLight(40);
+    directionalLight(255, 255, 255, 0.5, 0.4, -1);
+    pointLight(120, 255, 120, 0, 0, 200);
+
+    // Update Matrix rain texture for the globe
+    updateMatrixTexture();
+
+    // Spin the globe
+    globe.rotY += globe.rotSpeed;
+
+    // Draw textured sphere
+    push();
+    rotateY(globe.rotY);
+    rotateX(-0.15); // slight tilt
+    noStroke();
+    texture(texG);
+    sphere(globe.radius, 64, 64); // high-res sphere for cleaner texture
+    pop();
+
+    // Draw neon wireframe grid on top
+    drawNeonGrid();
+  }
+
+  function updateMatrixTexture() {
+    const hue = colorThemes[currentTheme].hue;
+
+    // Subtle dark background
+    texG.fill(hue, 80, 5, 100); // very dark background in theme hue
+    texG.rect(0, 0, texSize, texSize);
+
+    // Matrix rain columns (on the globe)
+    for (let i = 0; i < cols; i++) {
+      const x = i * charSize;
+      const y = (drops[i] * charSize) % texSize;
+
+      // trailing fade
+      texG.fill(hue, 70, 10, 40);
+      texG.rect(x, 0, charSize, texSize);
+
+      // leading bright glyph (the "head")
+      const ch = glyphs.charAt(floor(random(glyphs.length)));
+      texG.fill(hue, 30, 100); // bright head
+      texG.text(ch, x, y);
+
+      // dim trail glyph just behind head
+      texG.fill(hue, 80, 70);
+      texG.text(glyphs.charAt(floor(random(glyphs.length))), x, (y - charSize + texSize) % texSize);
+
+      // per-column speed + occasional jump (keeps it organic)
+      drops[i] = drops[i] + globeSpeeds[i];
+      if (random() < 0.01) drops[i] += floor(random(1, rows * 0.05));
+    }
+
+    // Soft vignette for depth
+    texG.noFill();
+    for (let r = texSize * 0.35; r < texSize * 0.7; r += 6) {
+      const a = map(r, texSize * 0.35, texSize * 0.7, 0, 40);
+      texG.stroke(hue, 80, 10, a);
+      texG.ellipse(texSize / 2, texSize / 2, r, r);
+    }
+    texG.noStroke();
+  }
+
+  function updateMatrixBackgroundTexture() {
+    const hue = colorThemes[currentTheme].hue;
+
+    // Darker base (less glow bleed)
+    bgG.fill(0, 0, 0, 25); // stronger fade to dark background
+    bgG.rect(0, 0, bgG.width, bgG.height);
+
+    // gentle drift so the background moves diagonally (never aligning with globe)
+    bgXDrift = (bgXDrift + bgXDriftSpeed) % bgG.width;
+    bgYDrift = (bgYDrift + bgYDriftSpeed) % bgG.height;
+
+    // Columns of faint glyphs
+    for (let i = 0; i < bgCols; i++) {
+      // apply horizontal & vertical drift offsets
+      const x = (i * bgCharSize + bgXDrift) % bgG.width;
+      const y = (bgDrops[i] * bgCharSize + bgYDrift) % bgG.height;
+
+      // darker, subtler glow per column
+      bgG.fill(hue, 60, 10, 28);
+      bgG.rect(x, 0, bgCharSize, bgG.height);
+
+      // bright-ish head (still visible but not overpowering)
+      const ch = glyphs.charAt(Math.floor(Math.random() * glyphs.length));
+      bgG.fill(hue, 40, 70, 78);
+      bgG.text(ch, x, y);
+
+      // trailing glyph
+      bgG.fill(hue, 70, 40, 48);
+      bgG.text(glyphs.charAt(Math.floor(Math.random() * glyphs.length)), x, (y - bgCharSize + bgG.height) % bgG.height);
+
+      // slower, per-column varied speed (clearly different from globe)
+      bgDrops[i] += bgSpeeds[i];
+      if (bgDrops[i] >= bgRows) bgDrops[i] -= bgRows;
+
+      // tiny randomness to avoid marching in lockstep
+      if (Math.random() < 0.004) bgSpeeds[i] = constrain(bgSpeeds[i] + random(-0.05, 0.05), 0.12, 0.6);
+    }
+
+    // subtle vignette
+    bgG.noFill();
+    const edge = Math.min(bgG.width, bgG.height) * 0.6;
+    for (let r = edge; r < Math.max(bgG.width, bgG.height); r += 24) {
+      const a = map(r, edge, Math.max(bgG.width, bgG.height), 0, 15);
+      bgG.stroke(hue, 50, 10, a);
+      bgG.ellipse(bgG.width / 2, bgG.height / 2, r, r);
+    }
+    bgG.noStroke();
+  }
+
+  function drawNeonGrid() {
+    const hue = colorThemes[currentTheme].hue;
+
+    push();
+    rotateY(globe.rotY);
+    rotateX(-0.15);
+
+    const r = globe.radius * 1.002; // tiny offset so lines sit above texture
+    const latSteps = 12;
+    const lonSteps = 16;
+
+    // Neon stroke (outer glow pass)
+    strokeWeight(2.5);
+    stroke(hue, 255, 120, 30); // faint halo
+    drawGridLines(r, latSteps, lonSteps);
+
+    // Core bright stroke
+    strokeWeight(1);
+    stroke(hue, 255, 120);
+    drawGridLines(r, latSteps, lonSteps);
+
+    pop();
+  }
+
+  function drawGridLines(r, latSteps, lonSteps) {
+    noFill();
+
+    // Longitudes
+    for (let i = 0; i < lonSteps; i++) {
+      const lon = map(i, 0, lonSteps, 0, TWO_PI);
+      beginShape();
+      for (let t = -HALF_PI; t <= HALF_PI; t += 0.06) {
+        const x = r * cos(t) * cos(lon);
+        const y = r * sin(t);
+        const z = r * cos(t) * sin(lon);
+        vertex(x, y, z);
+      }
+      endShape();
+    }
+
+    // Latitudes
+    for (let j = 1; j < latSteps; j++) {
+      const lat = map(j, 0, latSteps, -HALF_PI, HALF_PI);
+      beginShape();
+      for (let a = 0; a <= TWO_PI + 0.01; a += 0.06) {
+        const x = r * cos(lat) * cos(a);
+        const y = r * sin(lat);
+        const z = r * cos(lat) * sin(a);
+        vertex(x, y, z);
+      }
+      endShape();
+    }
+  }
+
+  // Click: cycle hue (no stopping the spin)
+  function mousePressed() {
+    // Shuffle glyph set slightly so it feels fresh
+    glyphs = shuffleString(glyphs);
+
+    // Cycle color theme (affects globe + background)
+    currentTheme = (currentTheme + 1) % colorThemes.length;
+  }
+
+  function shuffleString(s) {
+    const arr = s.split('');
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr.join('');
+  }
+
+  function windowResized() {
+    const canvasWidth = Math.min(windowWidth * 0.9, 800);
+    resizeCanvas(canvasWidth, 200);
+
+    // keep background buffer in sync with canvas size
+    if (bgG) {
+      bgG.resizeCanvas(canvasWidth, 200);
+      bgCols = Math.floor(bgG.width / bgCharSize);
+      bgRows = Math.floor(bgG.height / bgCharSize);
+      bgDrops = new Array(bgCols).fill(0).map(() => Math.floor(random(bgRows)));
+      bgSpeeds = new Array(bgCols).fill(0).map(() => random(0.18, 0.55));
+      bgXDrift = 0;
+      bgYDrift = 0;
+    }
+  }
+
+  // ===== Your existing non-canvas DOM behavior (unchanged) =====
+
+  // Fade-up animation observer
+  const fadeUps = document.querySelectorAll('.fade-up');
+  const observerOptions = { threshold: 0.1 };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  fadeUps.forEach(el => observer.observe(el));
+
+  // Resume navigation
+  document.getElementById('resume-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('resume-content').style.display = 'block';
+
+    const resumeFadeUps = document.querySelectorAll('#resume-content .fade-up');
+    resumeFadeUps.forEach(el => el.classList.add('show'));
+  });
+
+  document.getElementById('back-button').addEventListener('click', function() {
+    document.getElementById('resume-content').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+  });
+</script>
+</body>
+</html>
